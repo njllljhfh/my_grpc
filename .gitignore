@@ -179,3 +179,4 @@ $RECYCLE.BIN/
 *.lnk
 
 .idea
+.idea/*
