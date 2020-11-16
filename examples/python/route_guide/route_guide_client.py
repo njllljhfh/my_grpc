@@ -106,14 +106,18 @@ def run():
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = route_guide_pb2_grpc.RouteGuideStub(channel)
         # print("-------------- GetFeature --------------")
+        # # 可同步，可异步
         # guide_get_feature(stub)
-        print("-------------- ListFeatures --------------")
-        guide_list_features(stub)
-        # print("-------------- RecordRoute --------------")
-        # guide_record_route(stub)
-        # print("-------------- RouteChat --------------")
-        # guide_route_chat(stub)
 
+        # print("-------------- ListFeatures --------------")
+        # guide_list_features(stub)
+
+        # print("-------------- RecordRoute --------------")
+        # # 可同步，可异步
+        # guide_record_route(stub)
+
+        print("-------------- RouteChat --------------")
+        guide_route_chat(stub)
 
 if __name__ == '__main__':
     logging.basicConfig()

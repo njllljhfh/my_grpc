@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package asynch;
+
+service DuckService {
+    rpc Quack (QuackRequest) returns (QuackResponse);
+}
+
+message QuackRequest {
+    int32 quackTimes = 1;
+}
+
+message QuackResponse {
+    string quackMsg = 1;
+}

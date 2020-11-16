@@ -15,6 +15,7 @@
 """The Python implementation of the GRPC helloworld.Greeter server."""
 import os
 import sys
+import time
 from concurrent import futures
 import logging
 
@@ -28,19 +29,12 @@ from examples.python.helloword import helloworld_pb2_grpc, helloworld_pb2
 class Greeter(helloworld_pb2_grpc.GreeterServicer):
 
     def SayHello(self, request, context):
-        # import time
-        # time.sleep(30)
+        import time
+        time.sleep(5)
         return helloworld_pb2.HelloReply(message='Hello, %s!' % request.name)
 
     def SayHelloAgain(self, request, context):
         return helloworld_pb2.HelloReply(message='Hello, %s!' % request.name)
-
-    def SayHelloStream(self, request, context):
-        i = 0
-        name = request.name
-        while i < 3:
-            yield helloworld_pb2.HelloReply(message='Hello, %s!' % name)
-
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -51,6 +45,12 @@ def serve():
     server.start()
     print(f"Listen on {addr}")
     server.wait_for_termination()
+    # try:
+    #     while True:
+    #         time.sleep(64 * 64 * 100)
+    # except KeyboardInterrupt:
+    #     print('stopping server. . .')
+    #     server.stop(None)
 
 
 if __name__ == '__main__':
